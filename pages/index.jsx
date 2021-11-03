@@ -3,16 +3,27 @@ import Head from 'next/head'
 import { Header } from "../compoents/Header";
 import { Main } from "../compoents/Main";
 import { Footer } from "../compoents/Footer";
-import { useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect } from "react";
 
 export default function Home() {
-  const foo = 1;
+  const [foo, setFoo] = useState(1);
+  const [text, setText] = useState("");
+  const [isShow, setIsShow] = useState(false);
 
-  const handleClick = useCallback((e) => {
-      console.log(e.target.href);
+  const handleClick = useCallback(() => {
       alert(foo);
-      e.preventDefault();
     },[])
+
+    const isValue = (e) => {
+        if(e.target.value.length > 5) {
+          alert('５文字未満');
+        };
+        setText(e.target.value);
+    }
+
+    const changeDisplay = useCallback(() => {
+        setIsShow((isShow) => !isShow);
+      },[]);
 
     useEffect(() => {
       //マウント時
@@ -29,13 +40,25 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <button onClick={() => alert('hi')}>ボタン </button>
-      <a
-        href="/about"
+
+      <h1>{foo}</h1>
+      <button onClick={ () => setFoo(foo => foo + 1)}>ccount up </button>
+      <button
         onClick={handleClick}
+        type="button"
       >
         ボタン
-      </a>
+      </button>
+
+      <input type="text" value={text} onChange={isValue} />
+      <p>{text}</p>
+
+      <button onClick={changeDisplay} >変化します</button>
+      {
+        isShow
+        ? <p>見えてる</p>
+        : null
+      }
       <Main title="index page" />
 
       <Footer />
