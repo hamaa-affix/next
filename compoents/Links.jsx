@@ -26,7 +26,7 @@ export const Links = () => {
       <div className="grid">
         { ITEMS.map( item => {
           return (
-            <a key={key.href} href={ item.href } className="card">
+            <a key={item.href} href={ item.href } className="card">
               <h3>{ item.title }</h3>
               <p>{ item.description }</p>
             </a>

@@ -3,8 +3,25 @@ import Head from 'next/head'
 import { Header } from "../compoents/Header";
 import { Main } from "../compoents/Main";
 import { Footer } from "../compoents/Footer";
+import { useCallback, useEffect } from "react";
 
 export default function Home() {
+  const foo = 1;
+
+  const handleClick = useCallback((e) => {
+      console.log(e.target.href);
+      alert(foo);
+      e.preventDefault();
+    },[])
+
+    useEffect(() => {
+      //マウント時
+      document.body.style.backgroundColor =  "red"
+      return () => {
+        document.body.style.backgroundColor =  ""
+      }
+    }, [ ])
+
   return (
     <div className="container">
       <Head>
@@ -12,6 +29,13 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
+      <button onClick={() => alert('hi')}>ボタン </button>
+      <a
+        href="/about"
+        onClick={handleClick}
+      >
+        ボタン
+      </a>
       <Main title="index page" />
 
       <Footer />
