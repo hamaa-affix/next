@@ -4,47 +4,15 @@ import { Header } from "../compoents/Header";
 import { Main } from "../compoents/Main";
 import { Footer } from "../compoents/Footer";
 import { useState, useCallback, useEffect } from "react";
+import { useCounter } from "../hooks/useCounter";
+import { useInputArray } from "../hooks/useInputArray";
+import { useChangeBackgroud } from "../hooks/useChangeBackgroud";
+
 
 export default function Home() {
-  const [foo, setFoo] = useState(1);
-  const [text, setText] = useState("");
-  const [isShow, setIsShow] = useState(false);
-  const [array, setArray] = useState([]);
-
-
-  const handleClick = useCallback(() => {
-      alert(foo);
-    },[])
-
-    const isValue = (e) => {
-        if(e.target.value.length > 5) {
-          alert('５文字未満');
-        }
-        setText(e.target.value);
-    }
-
-    const changeDisplay = useCallback(() => {
-        setIsShow((isShow) => !isShow);
-      },[]);
-
-      const handleAdd = useCallback( () => {
-          setArray(prevArray => {
-            if(prevArray.some(item => item === text)) {
-              alert('same')
-              return prevArray
-            }
-            const newArray = [...prevArray, text]
-            return newArray;
-          });
-      }, [text]);
-
-    useEffect(() => {
-      //マウント時
-      document.body.style.backgroundColor =  "red"
-      return () => {
-        document.body.style.backgroundColor =  ""
-      }
-    }, [ ])
+    const { count, isShow, handleClick, handleDisplay } = useCounter();
+    const { text, array, handleChange, handleAdd } = useInputArray();
+    useChangeBackgroud()
 
   return (
     <div className="container">
@@ -54,19 +22,18 @@ export default function Home() {
       </Head>
       <Header />
 
-      <h1>{foo}</h1>
-      <button onClick={ () => setFoo(foo => foo + 1)}>ccount up </button>
+      <h1>{count}</h1>
       <button
         onClick={handleClick}
         type="button"
       >
-        ボタン
+        countUP
       </button>
 
-      <input type="text" value={text} onChange={isValue} />
+      <input type="text" value={text} onChange={handleChange} />
       <p>{text}</p>
 
-      <button onClick={changeDisplay} >変化します</button>
+      <button onClick={handleDisplay} >変化します</button>
       {
         isShow
         ? <p>見えてる</p>
