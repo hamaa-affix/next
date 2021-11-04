@@ -9,6 +9,8 @@ export default function Home() {
   const [foo, setFoo] = useState(1);
   const [text, setText] = useState("");
   const [isShow, setIsShow] = useState(false);
+  const [array, setArray] = useState([]);
+
 
   const handleClick = useCallback(() => {
       alert(foo);
@@ -17,13 +19,24 @@ export default function Home() {
     const isValue = (e) => {
         if(e.target.value.length > 5) {
           alert('５文字未満');
-        };
+        }
         setText(e.target.value);
     }
 
     const changeDisplay = useCallback(() => {
         setIsShow((isShow) => !isShow);
       },[]);
+
+      const handleAdd = useCallback( () => {
+          setArray(prevArray => {
+            if(prevArray.some(item => item === text)) {
+              alert('same')
+              return prevArray
+            }
+            const newArray = [...prevArray, text]
+            return newArray;
+          });
+      }, [text]);
 
     useEffect(() => {
       //マウント時
@@ -59,6 +72,15 @@ export default function Home() {
         ? <p>見えてる</p>
         : null
       }
+
+      <ul>
+        {array.map(item => {
+          return (
+            <li key={item}>{item}</li>
+          );
+        })}
+      </ul>
+      <button onClick={handleAdd}>追加</button>
       <Main title="index page" />
 
       <Footer />
