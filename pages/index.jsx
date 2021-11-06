@@ -10,7 +10,7 @@ import { useChangeBackgroud } from "../hooks/useChangeBackgroud";
 
 
 export default function Home() {
-    const { count, isShow, handleClick, handleDisplay } = useCounter();
+    const { count, doubleCount, isShow, handleClick, handleDisplay } = useCounter();
     const { text, array, handleChange, handleAdd } = useInputArray();
     useChangeBackgroud()
 
@@ -22,7 +22,7 @@ export default function Home() {
       </Head>
       <Header />
 
-      <h1>{count}</h1>
+      <h1>{doubleCount}</h1>
       <button
         onClick={handleClick}
         type="button"

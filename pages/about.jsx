@@ -3,18 +3,53 @@ import Head from 'next/head'
 import { Header } from "../compoents/Header";
 import { Main } from "../compoents/Main";
 import { Footer } from "../compoents/Footer";
+import { useCounter } from "../hooks/useCounter";
+import { useInputArray } from "../hooks/useInputArray";
+import { useChangeBackgroud } from "../hooks/useChangeBackgroud";
+
 
 export default function Home() {
+    const { count, isShow, handleClick, handleDisplay } = useCounter();
+    const { text, array, handleChange, handleAdd } = useInputArray();
+    useChangeBackgroud()
+
   return (
     <div className="container">
       <Head>
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Header/>
+      <Header />
+
+      <h1>{count}</h1>
+      <button
+        onClick={handleClick}
+        type="button"
+      >
+        countUP
+      </button>
+
+      <input type="text" value={text} onChange={handleChange} />
+      <p>{text}</p>
+
+      <button onClick={handleDisplay} >変化します</button>
+      {
+        isShow
+        ? <p>見えてる</p>
+        : null
+      }
+
+      <ul>
+        {array.map(item => {
+          return (
+            <li key={item}>{item}</li>
+          );
+        })}
+      </ul>
+      <button onClick={handleAdd}>追加</button>
       <Main title="about page" />
 
-        <Footer />
+      <Footer />
 
       <style jsx>{`
         .container {
