@@ -14,6 +14,17 @@ export default function Home() {
     const { text, array, handleChange, handleAdd } = useInputArray();
     useChangeBackgroud()
 
+    const [posts, setPosts] = useState([]);
+
+    const getPosts = useCallback(async () => {
+        const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+        const json = await res.json();
+        setPosts(json)
+    }, []);
+
+    useEffect(() => {
+        getPosts();
+    }, [])
   return (
     <div className="container">
       <Head>
@@ -21,36 +32,14 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-
-      <h1>{doubleCount}</h1>
-      <button
-        onClick={handleClick}
-        type="button"
-      >
-        countUP
-      </button>
-
-      <input type="text" value={text} onChange={handleChange} />
-      <p>{text}</p>
-
-      <button onClick={handleDisplay} >変化します</button>
-      {
-        isShow
-        ? <p>見えてる</p>
-        : null
-      }
-
       <ul>
-        {array.map(item => {
+        {posts.map(post => {
           return (
-            <li key={item}>{item}</li>
+            <li key={post.id}>{post.title}</li>
           );
         })}
       </ul>
-      <button onClick={handleAdd}>追加</button>
-      <Main title="index page" />
 
-      <Footer />
 
       <style jsx>{`
         .container {
