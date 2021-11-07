@@ -8,23 +8,14 @@ import { useCounter } from "../hooks/useCounter";
 import { useInputArray } from "../hooks/useInputArray";
 import { useChangeBackgroud } from "../hooks/useChangeBackgroud";
 
+import { Posts } from "../compoents/posts/index"
+
 
 export default function Home() {
     const { count, doubleCount, isShow, handleClick, handleDisplay } = useCounter();
     const { text, array, handleChange, handleAdd } = useInputArray();
     useChangeBackgroud()
 
-    const [posts, setPosts] = useState([]);
-
-    const getPosts = useCallback(async () => {
-        const res = await fetch("https://jsonplaceholder.typicode.com/posts");
-        const json = await res.json();
-        setPosts(json)
-    }, []);
-
-    useEffect(() => {
-        getPosts();
-    }, [])
   return (
     <div className="container">
       <Head>
@@ -32,15 +23,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <ul>
-        {posts.map(post => {
-          return (
-            <li key={post.id}>{post.title}</li>
-          );
-        })}
-      </ul>
-
-
+      <Posts />
       <style jsx>{`
         .container {
           min-height: 100vh;
