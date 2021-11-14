@@ -6,7 +6,7 @@ export const useChangeBackgroud = () => {
   const router = useRouter();
 
   const bigColor = useMemo(() => {
-      return router.pathname === "/" ? "red" : "beige";
+      return router.pathname === "/" ? "MediumSeaGreen" : "beige";
   }, [])
 
   useEffect(() => {

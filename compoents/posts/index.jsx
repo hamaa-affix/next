@@ -1,5 +1,6 @@
 // @ts-nocheck
-import { useCallback, useEffect, useReducer } from "react";
+import { useCallback, useEffect, useReducer, useState } from "react";
+import Link from "next/link";
 
 const initialState = {
     data: [],
@@ -29,7 +30,7 @@ const reducer = (state, action) => {
 export const Posts = () => {
   // const [isLoading, setIsLoading] = useState(true);
   // const [error, setError] = useState(null);
-  // const [posts, setPosts] = useState([]);
+  //const [posts, setPosts] = useState([]);
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -65,14 +66,18 @@ export const Posts = () => {
     return <div>{error.message}</div>
   }
 
-  if(posts.length === 0) {
+  if(state.length === 0) {
     return <div>データは空です</div>
   }
   return (
     <ol>
       {state.data.map(post => {
         return (
-          <li key={post.id}>{post.title}</li>
+          <li key={post.id}>
+            <Link href={`/post/${post.id}`}>
+              <a>{post.title}</a>
+            </Link>
+          </li>
         );
       })}
     </ol>
