@@ -27,6 +27,9 @@ const PostId = () => {
       </Head>
 
       <Header />
+      <div className="text-red-500">
+        テスト
+      </div>
       <div>{query.query.id}</div>
 
 
