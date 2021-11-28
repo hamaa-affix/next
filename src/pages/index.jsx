@@ -7,13 +7,10 @@ import { Posts } from "src/compoents/posts/index"
 
 
 export default function Home() {
-    const { count, doubleCount, isShow, handleClick, handleDisplay } = useCounter();
-    const { text, array, handleChange, handleAdd } = useInputArray();
-    useChangeBackgroud()
 
   return (
     <div className="container">
-      <Posts />
+      {/* <Posts /> */}
 
     </div>
   )
