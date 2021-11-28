@@ -1,6 +1,6 @@
 // @ts-nocheck
 import Head from 'next/head'
-import { Header } from "../../../compoents/Header";
+import { Header } from "src/compoents/Header";
 import { Main } from "../../../compoents/Main";
 import { Footer } from "../../../compoents/Footer";
 import { useCounter } from "../../../hooks/useCounter";

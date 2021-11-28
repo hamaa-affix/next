@@ -1,9 +1,9 @@
 // @ts-nocheck
 import Head from 'next/head'
-import { Header } from "../../../compoents/Header";
-import { useCounter } from "../../../hooks/useCounter";
-import { useInputArray } from "../../../hooks/useInputArray";
-import { useChangeBackgroud } from "../../../hooks/useChangeBackgroud";
+import { Header } from "../../../../compoents/Header";
+import { useCounter } from "../../../../hooks/useCounter";
+import { useInputArray } from "../../../../hooks/useInputArray";
+import { useChangeBackgroud } from "../../../../hooks/useChangeBackgroud";
 
 //router
 import { useRouter } from "next/router";
