@@ -16,12 +16,10 @@ export const Header = () => {
                 </Link>
             </div>
             <div className="mr-48" >
-                <div className="h-full w-24 bg-yellow-100 text-center" >
-                    <div>
-                        <Link href="/login">
-                            <a>Login</a>
-                        </Link>
-                    </div>
+                <div className="h-24 w-24 bg-yellow-100 text-center" >
+                    <Link href="/login">
+                        <a className="inline-block mt-8">Login</a>
+                    </Link>
                 </div>
             </div>
         </header>
